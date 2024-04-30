@@ -7,15 +7,15 @@ const server = http.createServer((req, res)=>{
     if (req.method === 'POST'){
         console.log('Llego un POST');
 
-        let body = '';
+        let myBody = '';
 
         req.on('data', (chunk)=>{
-            body += chunk;
+            myBody += chunk;
         });
 
         req.on('end',()=>{
 
-            let userName = body.split('=')[1];
+            let userName = myBody.split('=')[1];
 
             res.end(`<h1>${userName}</h1>`);
         });

@@ -3,10 +3,10 @@ const express = require('express');
 const app = express();
 
 app.use((req, res, next)=>{
-    let body = '';
+    let myBody = '';
     
     req.on('end', ()=>{
-        const userName = body.split('=')[1]
+        const userName = myBody.split('=')[1]
         if(userName){
             console.log(userName);
             req.body = {name : userName};
@@ -15,14 +15,14 @@ app.use((req, res, next)=>{
     })
 
     req.on('data', (chunk)=>{
-        body += chunk;
+        myBody += chunk;
     });    
 });
 
 app.use((req, res, next)=>{
     
     if (req.body){
-        res.send('User: ' + req.body.name);
+        res.send(`Usuario: ${req.body.name}`);
     }
     else{
         res.send(`<form method="POST">
